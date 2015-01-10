@@ -1,0 +1,1 @@
+angular.module('mean-app', ['ngRoute', 'appRoutes', 'HomeController', 'UserController', 'UserService']);
