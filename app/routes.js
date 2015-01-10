@@ -23,6 +23,20 @@ module.exports = function (app) {
     });
 
     // route to handle creating goes here (app.post)
+    app.post('/api/users', function(req, res) {
+       var user = new User();
+        user.firstName = req.body.name;
+
+        user.save(function(err) {
+            if(err) {
+                res.send(err);
+            }
+
+            res.json({'message' : 'User was created with id: ' + user.id});
+        })
+
+    });
+
     // route to handle delete goes here (app.delete)
 
     // frontend routes =========================================================
