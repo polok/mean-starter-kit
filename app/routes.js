@@ -1,5 +1,5 @@
 // grab the nerd model we just created
-var Nerd = require('./models/user');
+var User = require('./models/user');
 
 module.exports = function (app) {
 
