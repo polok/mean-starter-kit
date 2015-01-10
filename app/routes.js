@@ -31,7 +31,6 @@ module.exports = function (app) {
        });
     });
 
-    // route to handle creating goes here (app.post)
     app.post('/api/users', function(req, res) {
        var user = new User();
         user.firstName = req.body.name;
@@ -43,7 +42,24 @@ module.exports = function (app) {
 
             res.json({'message' : 'User was created with id: ' + user.id});
         })
+    });
 
+    app.put('/api/users/:user_id', function(req, res) {
+        User.findById(req.params.user_id, function(err, user) {
+            if(err) {
+                res.send(err);
+            }
+
+            var u = user;
+            u.firstName = req.body.name;
+
+            u.save(function(err) {
+                if(err) {
+                    res.send(err);
+                }
+                res.json({message : 'User was updated'});
+            });
+        });
     });
 
     // route to handle delete goes here (app.delete)
