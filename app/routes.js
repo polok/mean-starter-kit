@@ -62,6 +62,21 @@ module.exports = function (app) {
         });
     });
 
+    app.delete('/api/users/:user_id', function(req, res) {
+        User.findById(req.params.user_id, function(err, user) {
+            if(err) {
+                res.send(err);
+            }
+
+            user.remove(function(err) {
+                if(err) {
+                    res.send(err);
+                }
+                res.json({message : 'User was deleted - ' + req.params.user_id});
+            });
+        });
+    });
+
     // route to handle delete goes here (app.delete)
 
     // frontend routes =========================================================
