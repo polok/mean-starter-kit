@@ -7,7 +7,6 @@ module.exports = function (app) {
     // handle things like api calls
     // authentication routes
 
-    // sample api route
     app.get('/api/users', function (req, res) {
         // use mongoose to get all nerds in the database
         User.find(function (err, users) {
@@ -20,6 +19,16 @@ module.exports = function (app) {
 
             res.json(users); // return all nerds in JSON format
         });
+    });
+
+    app.get('/api/users/:user_id', function (req, res) {
+       User.findById(req.params.user_id, function(err, user) {
+           if(err) {
+               res.send(err);
+           }
+
+           res.json(user);
+       });
     });
 
     // route to handle creating goes here (app.post)
